@@ -8,8 +8,8 @@ function App() {
   <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
       <Nav className="me-auto">
-          <Nav.Link href="#home">Create Employee</Nav.Link>
-          <Nav.Link href="#link">List All Employees</Nav.Link>
+          <Nav.Link to='/'>Create Employee</Nav.Link>
+          <Nav.Link to="/listEmployees">List All Employees</Nav.Link>
       </Nav>
       <Navbar.Collapse className="justify-content-end">
           <Navbar.Brand href="#home">CRUD Vue.js + Node.js + PostgreSQL</Navbar.Brand>
