@@ -5,13 +5,13 @@ import App from './App.jsx'
 import ListEmployees from './components/ListEmployees';
 import CreateEmployee from './components/CreateEmployee';
 import NotFound from './components/NotFound';
-// import AppHome from './components/AppHome';
+import AppHome from './components/AppHome';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter([
   {
   path:"/",
-  // element:<AppHome />
+  element:<AppHome />
   },
   {
     path:"/listEmployees",

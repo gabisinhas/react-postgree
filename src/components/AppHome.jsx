@@ -1,8 +1,13 @@
+import Header from './NavBar';
+
 const AppHome = () => {
   return (
-    <div>
-        <h2>Bem Vindo</h2>
-    </div>
+    <>
+      <Header />
+      <div>
+          <h2>Bem Vindo a Minha Primeira Página Usando React!!!</h2>
+      </div>
+    </>
   )
 }
 
