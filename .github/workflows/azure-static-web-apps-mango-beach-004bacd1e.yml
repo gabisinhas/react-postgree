@@ -29,7 +29,9 @@ jobs:
         uses: actions/github-script@v6
         with:
            script: |
-               const core = require('@actions/core');
+               if (typeof core === 'undefined') {
+                 core = require('@actions/core');
+               }
                const idToken = await core.getIDToken();
                return idToken;
            result-encoding: string
