@@ -34,7 +34,8 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const core = require('@actions/core');
-            // ...existing code...
             // Ensure 'core' is not declared again
+            if (typeof core === 'undefined') {
+              core = require('@actions/core');
+            }
             // ...existing code...
