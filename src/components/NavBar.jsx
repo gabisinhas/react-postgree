@@ -7,6 +7,7 @@ const Header = () => {
     <Navbar expand="lg" className="bg-body-tertiary"  bg="dark" data-bs-theme="dark">
     <Container>
     <Nav className="me-auto">
+        <Nav.Link href='/'>Home Page</Nav.Link>
         <Nav.Link href='/createemployee'>Create Employee</Nav.Link>
         <Nav.Link href="/listEmployees">List All Employees</Nav.Link>
     </Nav>
