@@ -8,7 +8,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "server": "node server.js",
-    "start": "vite"
+    "start": "vite build && vite"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
