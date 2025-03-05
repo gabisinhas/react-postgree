@@ -8,9 +8,66 @@
     <title>My React App</title>
   </head>
   <body>
-    <h1 class="text-red-900 bg-yellow-500 hover:bg-gray-600">Meu arquivo </h1>
-    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-      Button</button>
+    <div class="container p-3 bg-yellow-400 md:bg-red-600">
+      <h1 class="text-red-900 m-5 hover:bg-gray-600">Playing with Tailwind CSS</h1>
+    </div>
+    <div class="container m-4">
+      <button class="btn-blue">Button</button>
+      <button class="btn-green">Button</button>
+    </div>
+
+    <div class="container bg-gray-400 p-4">
+      <div class="inline-block bg-green-500">
+        <span>Hello Mundo</span>
+      </div>
+      <div class="inline-block bg-pink-700">
+        <span>Hello Mundo 1233</span>
+      </div>
+      <div class="inline-block bg-yellow-300">
+        <span>Hello Mundo 4567 
+        </span>
+      </div>
+    </div>
+    <div class="container m-2 p-8 bg-green-200">
+      <div class="float-right bg-pink-700">
+        <span>Hello Mundo</span>
+      </div>
+    </div>
+    <div class="flex flex-col m-4">
+      <p>Div Flex Col</p>
+      <div class="flex-1 bg-red-500 p-4">1</div>
+      <div class="flex-1 bg-blue-500 p-4">2</div>
+      <div class="flex-1 bg-green-500 p-4">3</div>
+    </div>
+    <p class="pl-4">Div Flex Row</p>
+    <div class="flex flex-row m-4">
+      <div class="flex-1 bg-red-500 p-4">1</div>
+      <div class="flex-1 bg-blue-500 p-4">2</div>
+      <div class="flex-1 bg-green-500 p-4">3</div>
+    </div>
+    <p class="pl-4">Sobreposição</p>
+    <div class="container pl-2 m-4 relative">
+      <div class=" bg-yellow-500 z-10 absolute h-10 w-10 p-3 z-10">1</div>
+      <div class=" bg-purple-600 absolute h-10 w-10 m-3 p-2">2</div>
+    </div>
+    <div class="flex flex-wrap">
+      <p class="pl-2 p-6 m-8">Wrap</p>
+      <div class="flex-1 bg-red-500 p-2">1</div>
+      <div class="flex-1 bg-blue-500 p-2">2</div>
+      <div class="flex-1 bg-green-500 p-2">3</div>
+      <div class="flex-1 bg-gray-600 p-2">4</div>
+      <div class="flex-1 bg-pink-800 p-2">5</div>
+    </div>
+    <div class="grid grid-cols-4 p-2 gap-2">
+      <div class="bg-yellow-400">item1</div>
+      <div class="bg-green-500">item2</div>
+      <div class="bg-pink-600">item3</div>
+      <div class="bg-indigo-700">item4</div>
+      <div class="bg-yellow-400">item5</div>
+      <div class="bg-green-500">item6</div>
+      <div class="bg-pink-600">item7</div>
+      <div class="bg-indigo-700">item8</div>
+    </div>  
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
