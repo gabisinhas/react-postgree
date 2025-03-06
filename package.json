@@ -7,8 +7,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "node server.js",
-    "start": "vite build && vite"
+    "server": "node server.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
@@ -37,6 +36,6 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
-    "terser": "^5.16.4"
+    "terser": "^5.39.0"
   }
 }
