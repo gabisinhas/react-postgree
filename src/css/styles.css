@@ -487,7 +487,11 @@ table {
 }
 
 h1,
-h2,
+h2{
+  font-weight: 400;
+  font-size: 2.5rem;
+
+}
 h3,
 h4,
 h5,

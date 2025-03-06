@@ -23,6 +23,7 @@ export default defineConfig({
     outDir: 'dist', // Output directory
     sourcemap: false, // Disable source maps for security
     minify: 'terser', // Minify using Terser
+    assetsDir: 'assets',
     rollupOptions: {
       output: {
         manualChunks: (id) => {
@@ -33,4 +34,9 @@ export default defineConfig({
       },
     },
   },
+  resolve: {
+    alias: {
+      '@': '/src'
+    }
+  }
 })

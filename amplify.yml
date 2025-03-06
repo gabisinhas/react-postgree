@@ -1,17 +1,16 @@
 version: 1
 frontend:
-    phases:
-        preBuild:
-            commands:
-                - rm -rf node_modules .npm # Delete existing cache to free space
-                - npm ci --prefer-offline
-        build:
-            commands:
-                - npm run build
-    artifacts:
-        baseDirectory: dist
-        files:
-            - '**/*'
-    cache:
-        paths:
-            - node_modules/**/* # Only keep node_modules, remove .npm cache
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
