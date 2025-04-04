@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App.jsx'
 import ListEmployees from './components/ListEmployees';
 import CreateEmployee from './components/CreateEmployee';
+import EmployeeForm from './components/EmployeeForm';
 import NotFound from './components/NotFound';
 import AppHome from './components/AppHome';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
   {
     path:"/listEmployees",
     element:<ListEmployees />
+  },
+  {
+    path:"/employeeForm",
+    element:<EmployeeForm />
   },
   {
     path:"/createEmployee",

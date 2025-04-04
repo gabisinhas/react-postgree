@@ -10,6 +10,7 @@ const Header = () => {
         <Nav.Link href='/'>Home Page</Nav.Link>
         <Nav.Link href='/createemployee'>Create Employee</Nav.Link>
         <Nav.Link href="/listEmployees">List All Employees</Nav.Link>
+        <Nav.Link href="/employeeForm">EmployeeForm</Nav.Link>
     </Nav>
     <Navbar.Collapse className="justify-content-end">
         <Navbar.Brand href="#home">CRUD React + Node.js + PostgreSQL</Navbar.Brand>
