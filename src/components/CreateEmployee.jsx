@@ -95,7 +95,6 @@ const CreateEmployee = () => {
           <div
             style={{
               position: 'absolute',
-              top: '-50em',
               left: '50%',
               transform: 'translateX(-50%)',
               backgroundColor: submitedStatus === 'true' ? 'green' : 'red',

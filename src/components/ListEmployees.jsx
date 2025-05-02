@@ -28,6 +28,7 @@ const ListEmployees = () => {
       <Container>
         <br />
         <h2 className="text-indigo-800">List Employees</h2>
+        <div style={{paddingBottom:'3em'}} >
         <table className="border-separate border-spacing-2 border border-gray-400 dark:border-gray-500">
           <thead>
             <tr>
@@ -46,6 +47,7 @@ const ListEmployees = () => {
             ))}
           </tbody>
         </table>
+        </div>
       </Container>
     </>
   );
