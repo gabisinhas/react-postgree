@@ -11,6 +11,8 @@ const api = axios.create({
 async function createNewEmployee(employeeData) {
   try {
     const response = await api.post('/employees', employeeData);
+    console.log("response", response);
+    
     return response.data;
   } catch (error) {
     console.error('Erro ao criar funcionário:', error);

@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import PageFooter from './PageFooter';
 import { createNewEmployee } from '../services/Api';
-import { useState } from 'react';
+import { use, useState } from 'react';
 
 const CreateEmployee = () => {
   const [formData, setFormData] = useState({
@@ -15,6 +15,8 @@ const CreateEmployee = () => {
     birth: '',
     employee_registration: ''
   });
+
+  const [submitedStatus, setSubmitedStatus] = useState('')
 
   const formConfig = {
     title: "User Registration",
@@ -37,6 +39,7 @@ const CreateEmployee = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setSubmitedStatus('')
       const cleanedData = {
         name: formData.name,
         employeeId: formData.employeeId,
@@ -49,7 +52,9 @@ const CreateEmployee = () => {
       
       const response = await createNewEmployee(cleanedData);
       console.log('Funcionário criado com sucesso:', response);
+      setSubmitedStatus('true')
     } catch (error) {
+      setSubmitedStatus('false')
       console.error('Erro ao criar funcionário:', error);
     }
   };
@@ -85,7 +90,45 @@ const CreateEmployee = () => {
     <>
       <Header />
       <br />
-      <div style={{ paddingLeft: '4em'}}>
+      <div style={{ paddingLeft: '4em', position: 'relative' }}>
+        {(submitedStatus === 'true' || submitedStatus === 'false') && (
+          <div
+            style={{
+              position: 'absolute',
+              top: '-50em',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              backgroundColor: submitedStatus === 'true' ? 'green' : 'red',
+              color: 'white',
+              padding: '1em',
+              borderRadius: '5px',
+              zIndex: 1000,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              width: '300px',
+            }}
+          >
+            <span>
+              {submitedStatus === 'true'
+                ? 'Form submitted successfully!'
+                : 'Error submitting the form. Please try again.'}
+            </span>
+            <button
+              style={{
+                background: 'none',
+                border: 'none',
+                color: 'white',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                marginLeft: '1em',
+              }}
+              onClick={() => setSubmitedStatus('')}
+            >
+              X
+            </button>
+          </div>
+        )}
         <form onSubmit={handleSubmit}>
           <h2>{formConfig.title}</h2>
           {formConfig.fields.map(field => (
@@ -101,7 +144,7 @@ const CreateEmployee = () => {
       </div>
       <br />
       <PageFooter />
-    </>   
+    </>
   );
 };
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Header from './NavBar';
+import PageFooter from "./PageFooter";
  
 function DesafioReact() {
   const [name, setName] = useState("");
@@ -24,6 +25,13 @@ function DesafioReact() {
     }
 
   };
+
+  const handleDelete = (index) => {
+    console.log(index);
+    const newData = submittedData.filter((_, i) => i !== index);
+    console.log(newData);
+    setSubmittedData(newData);
+  }
 
   return (
     <>
@@ -87,6 +95,9 @@ function DesafioReact() {
                   <div class="inline-block col-span-1 border-collapse border border-gray-600 ">{data.name}</div>
                   <div class="inline-block col-span-1 border-collapse border border-gray-600 ">{data.email}</div>
                   <div class="inline-block col-span-1 border-collapse border border-gray-600 ">{data.jobrole}</div>
+                  <button onClick={() => handleDelete(index)} class="w-25 rounded-full bg-red-300 hover:bg-gray-600" type="button" data-testid="delete-button">
+                    Delete
+                  </button>
                 </div>
               ))
             )}  
