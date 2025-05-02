@@ -6,24 +6,20 @@ const ListEmployees = () => {
   const [employees, setEmployees] = useState([]);
 
   useEffect(() => {
-    // const fetchEmployees = async () => {
-    //   try {
-    //     const data = await getAllEmployees();
-    //     setEmployees(data);
-    //   } catch (error) {
-    //     console.error('Error fetching employees:', error);
-    //   }
-    // };
+    const fetchEmployees = async () => {
+      try {
+        const data = await getAllEmployees();
+        if (Array.isArray(data)) {
+          setEmployees(data);
+        } else {
+          console.error('Fetched data is not an array:', data);
+        }
+      } catch (error) {
+        console.error('Error fetching employees:', error);
+      }
+    };
 
-    // fetchEmployees();
-
-    // Dados de exemplo
-    const sampleEmployees = [
-      { id: 1, name: 'John Doe', job_role: 'Developer', employee_registration: '12345' },
-      { id: 2, name: 'Jane Smith', job_role: 'Designer', employee_registration: '67890' },
-      { id: 3, name: 'Alice Johnson', job_role: 'Manager', employee_registration: '11223' },
-    ];
-    setEmployees(sampleEmployees);
+    fetchEmployees();
   }, []);
 
   return (
