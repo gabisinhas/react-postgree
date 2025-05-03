@@ -3,17 +3,32 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import PageFooter from './PageFooter';
 import { createNewEmployee } from '../services/Api';
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
+import { EmployeeContext } from '../ context/EmployeeContext';
 
-const EditEmployee = ({ employeeData }) => {
+const EditEmployee = () => {
+    const { employeeData } = useContext(EmployeeContext);
     const [formData, setFormData] = useState({
-        name: employeeData?.name || '',
-        employeeId: employeeData?.employeeId || '',
-        job_role: employeeData?.job_role || '',
-        salary: employeeData?.salary || '',
-        birth: employeeData?.birth || '',
-        employee_registration: employeeData?.employee_registration || ''
+        name: '',
+        employeeId: '',
+        job_role: '',
+        salary: '',
+        birth: '',
+        employee_registration: ''
     });
+
+    useEffect(() => {
+        if (employeeData) {
+            setFormData({
+                name: employeeData.name || '',
+                employeeId: employeeData.employeeId || '',
+                job_role: employeeData.job_role || '',
+                salary: employeeData.salary || '',
+                birth: employeeData.birth || '',
+                employee_registration: employeeData.employee_registration || ''
+            });
+        }
+    }, [employeeData]);
 
     const [submitedStatus, setSubmitedStatus] = useState('');
 

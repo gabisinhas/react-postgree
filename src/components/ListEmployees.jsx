@@ -1,28 +1,40 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import Header from './NavBar';
 import { getAllEmployees } from '../services/Api';
 import { deleteEmployeeById } from '../services/Api';
+import { EmployeeContext } from '../ context/EmployeeContext';
 
 const ListEmployees = () => {
 
   const navigate = useNavigate();
   const [employees, setEmployees] = useState([]);
+  const { setEmployeeData } = useContext(EmployeeContext);
 
   const handleEdit = (id) => {
     console.log('Edit button clicked for employee ID:', id);
     const employeeToEdit = employees.find((employee) => employee.employee_id === id);
+
+    if (!employeeToEdit) {
+      console.error('Employee not found for ID:', id);
+      return;
+    }
+
     console.log('Employee to edit:', employeeToEdit);
-    
-      navigate(`/editEmployee/${id}`, {
-        state: {
-          name: employeeToEdit.name,
-          job_role: employeeToEdit.job_role,
-          employee_registration: employeeToEdit.employee_registration,
-        },
-      });
+
+    const employeeContextData = {
+      name: employeeToEdit.name,
+      employeeId: employeeToEdit.employee_id,
+      salary: employeeToEdit.salary,
+      birth: employeeToEdit.birth,
+      job_role: employeeToEdit.job_role,
+      employee_registration: employeeToEdit.employee_registration,
     };
+
+    setEmployeeData(employeeContextData);
+    navigate(`/editEmployee/${id}`);
+  };
 
   const handleDelete = async (id) => {
     try {

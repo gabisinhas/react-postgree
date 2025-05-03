@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App.jsx'
@@ -9,6 +9,7 @@ import EmployeeForm from './components/EmployeeForm';
 import NotFound from './components/NotFound';
 import AppHome from './components/AppHome';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { EmployeeContext } from './ context/EmployeeContext.jsx';
 
 const router = createBrowserRouter([
   {
@@ -37,11 +38,20 @@ const router = createBrowserRouter([
   },
 ])
 
+const AppWrapper = () => {
+  const [employeeData, setEmployeeData] = useState(null);
+
+  return (
+    <EmployeeContext.Provider value={{ employeeData, setEmployeeData }}>
+      <RouterProvider router={router}/>
+      <App />
+    </EmployeeContext.Provider>
+  );
+};
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
     <React.StrictMode>
-    <RouterProvider router={router}/>
-      <App />
+      <AppWrapper />
     </React.StrictMode>
 )
