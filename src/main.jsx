@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App.jsx'
 import ListEmployees from './components/ListEmployees';
+import EditEmployee from './components/EditEmployee';
 import CreateEmployee from './components/CreateEmployee';
 import EmployeeForm from './components/EmployeeForm';
 import NotFound from './components/NotFound';
@@ -11,26 +12,29 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter([
   {
-  path:"/",
-  element:<AppHome />
+    path: "/",
+    element: <AppHome />
   },
   {
-    path:"/listEmployees",
-    element:<ListEmployees />
+    path: "/listEmployees",
+    element: <ListEmployees />
   },
   {
-    path:"/employeeForm",
-    element:<EmployeeForm />
+    path: "/employeeForm",
+    element: <EmployeeForm />
   },
   {
-    path:"/createEmployee",
-    element:<CreateEmployee />
+    path: "/createEmployee",
+    element: <CreateEmployee />
   },
   {
-    path:"/*",
-    element:<NotFound />
+    path: "/editEmployee/:id",
+    element: <EditEmployee />
   },
-
+  {
+    path: "/*",
+    element: <NotFound />
+  },
 ])
 
 

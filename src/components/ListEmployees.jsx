@@ -1,27 +1,28 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import Header from './NavBar';
 import { getAllEmployees } from '../services/Api';
-import { updateEmployee, deleteEmployeeById } from '../services/Api';
+import { deleteEmployeeById } from '../services/Api';
+
 const ListEmployees = () => {
+
+  const navigate = useNavigate();
   const [employees, setEmployees] = useState([]);
-  const handleUpdate = async (id, updatedData) => {
-    try {
-      const response = await updateEmployee(id, updatedData);
-      if (response.success) {
-        setEmployees((prevEmployees) =>
-          prevEmployees.map((employee) =>
-            employee.id === id ? { ...employee, ...updatedData } : employee
-          )
-        );
-        console.log('Employee updated successfully:', response);
-      } else {
-        console.error('Failed to update employee:', response.message);
-      }
-    } catch (error) {
-      console.error('Error updating employee:', error);
-    }
-  };
+
+  const handleEdit = (id) => {
+    console.log('Edit button clicked for employee ID:', id);
+    const employeeToEdit = employees.find((employee) => employee.employee_id === id);
+    console.log('Employee to edit:', employeeToEdit);
+    
+      navigate(`/editEmployee/${id}`, {
+        state: {
+          name: employeeToEdit.name,
+          job_role: employeeToEdit.job_role,
+          employee_registration: employeeToEdit.employee_registration,
+        },
+      });
+    };
 
   const handleDelete = async (id) => {
     try {
@@ -72,6 +73,7 @@ const ListEmployees = () => {
           <table className="border-separate border-spacing-2 border border-gray-400 dark:border-gray-500">
             <thead>
               <tr>
+                <th className="bg-gray-400 border border-gray-300 ...">Id</th>
                 <th className="bg-gray-400 border border-gray-300 ...">Name</th>
                 <th className="bg-gray-400 border border-gray-300 ...">Job Role</th>
                 <th className="bg-gray-400 border border-gray-300 ...">Employee Registration</th>
@@ -83,13 +85,14 @@ const ListEmployees = () => {
               {employees.map((employee) => (
 
                 <tr key={employee.id}>
+                  <td className="border border-gray-300 ...">{employee.employee_id}</td>
                   <td className="border border-gray-300 ...">{employee.name}</td>
                   <td className="border border-gray-300 ...">{employee.job_role}</td>
                   <td className="border border-gray-300 ...">{employee.employee_registration}</td>
                   <td className="border border-gray-300 ...">
                     <button
                       className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
-                      onClick={() => handleEdit(employee.id)}
+                      onClick={() => handleEdit(employee.employee_id)}
                     >
                       Edit
                     </button>
@@ -111,11 +114,6 @@ const ListEmployees = () => {
       </Container>
     </>
   );
-
-  const handleEdit = (id) => {
-    console.log('Edit button clicked for employee ID:', id);
-    // Add logic to handle editing the employee record
-  };
 };
 
 export default ListEmployees;

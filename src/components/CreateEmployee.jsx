@@ -1,10 +1,9 @@
-import { Container } from 'react-bootstrap';
 import Header from './NavBar';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import PageFooter from './PageFooter';
 import { createNewEmployee } from '../services/Api';
-import { use, useState } from 'react';
+import { useState } from 'react';
 
 const CreateEmployee = () => {
   const [formData, setFormData] = useState({
