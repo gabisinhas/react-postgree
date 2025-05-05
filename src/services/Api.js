@@ -22,8 +22,8 @@ async function createNewEmployee(employeeData) {
 
 async function updateEmployee(employee) {
   try {
-    const id = employee.employee_id;
-    const response = await api.put(`/employees/${id}`, employee);
+    const { employee_id, ...updateData } = employee;
+    const response = await api.put(`/employees/${employee_id}`, updateData);
     return response.data;
   } catch (error) {
     console.error('Erro ao atualizar funcionário:', error);
@@ -31,12 +31,12 @@ async function updateEmployee(employee) {
   }
 }
 
-async function deleteEmployeeById(id) {
+async function deleteEmployeeById(employee_id) {
   try {
-    const response = await api.delete(`/employees/${id}`);
+    const response = await api.delete(`/employees/${employee_id}`);
     return response.data;
   } catch (error) {
-    console.error('Erro ao atualizar funcionário:', error);
+    console.error('Erro ao deletar funcionário:', error);
     throw error;
   }
 }

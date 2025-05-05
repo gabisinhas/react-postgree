@@ -25,7 +25,7 @@ const ListEmployees = () => {
 
     const employeeContextData = {
       name: employeeToEdit.name,
-      employeeId: employeeToEdit.employee_id,
+      employee_id: employeeToEdit.employee_id,
       salary: employeeToEdit.salary,
       birth: employeeToEdit.birth,
       job_role: employeeToEdit.job_role,
@@ -41,7 +41,7 @@ const ListEmployees = () => {
       const response = await deleteEmployeeById(id);
       if (response.success) {
         setEmployees((prevEmployees) =>
-          prevEmployees.filter((employee) => employee.id !== id)
+          prevEmployees.filter((employee) => employee.employee_id !== id)
         );
         console.log('Employee deleted successfully:', response);
       } else {
@@ -61,7 +61,7 @@ const ListEmployees = () => {
         if (Array.isArray(data)) {
           const validData = data.map((employee, index) => ({
             ...employee,
-            id: employee.id || index, // Ensure each employee has a unique id
+            id: employee.employee_id || index, // Ensure each employee has a unique id
           }));
           setEmployees(validData);
         } else {
@@ -85,7 +85,6 @@ const ListEmployees = () => {
           <table className="border-separate border-spacing-2 border border-gray-400 dark:border-gray-500">
             <thead>
               <tr>
-                <th className="bg-gray-400 border border-gray-300 ...">Id</th>
                 <th className="bg-gray-400 border border-gray-300 ...">Name</th>
                 <th className="bg-gray-400 border border-gray-300 ...">Job Role</th>
                 <th className="bg-gray-400 border border-gray-300 ...">Employee Registration</th>
@@ -97,7 +96,6 @@ const ListEmployees = () => {
               {employees.map((employee) => (
 
                 <tr key={employee.id}>
-                  <td className="border border-gray-300 ...">{employee.employee_id}</td>
                   <td className="border border-gray-300 ...">{employee.name}</td>
                   <td className="border border-gray-300 ...">{employee.job_role}</td>
                   <td className="border border-gray-300 ...">{employee.employee_registration}</td>
@@ -112,7 +110,7 @@ const ListEmployees = () => {
                   <td className="border border-gray-300 ...">
                     <button
                       className="bg-red-500 text-white px-2 py-1 rounded hover:bg-grey-300"
-                      onClick={() => handleDelete(employee.id)}
+                      onClick={() => handleDelete(employee.employee_id)}
                     >
                       Delete
                     </button>

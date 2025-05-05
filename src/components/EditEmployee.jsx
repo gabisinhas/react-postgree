@@ -2,11 +2,13 @@ import Header from './NavBar';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import PageFooter from './PageFooter';
-import { createNewEmployee } from '../services/Api';
+import { updateEmployee } from '../services/Api';
 import { useState, useContext, useEffect } from 'react';
 import { EmployeeContext } from '../ context/EmployeeContext';
+import { useParams } from 'react-router-dom';
 
 const EditEmployee = () => {
+    const { id } = useParams();
     const { employeeData } = useContext(EmployeeContext);
     const [formData, setFormData] = useState({
         name: '',
@@ -17,14 +19,21 @@ const EditEmployee = () => {
         employee_registration: ''
     });
 
+    const formatDate = (dateString) => {
+        if (!dateString) return '';
+        const date = new Date(dateString);
+        return date.toISOString().split('T')[0];
+    };
+
     useEffect(() => {
         if (employeeData) {
+            console.log('Employee data received:', employeeData);
             setFormData({
                 name: employeeData.name || '',
-                employeeId: employeeData.employeeId || '',
+                employeeId: employeeData.employee_id || '',
                 job_role: employeeData.job_role || '',
                 salary: employeeData.salary || '',
-                birth: employeeData.birth || '',
+                birth: formatDate(employeeData.birth) || '',
                 employee_registration: employeeData.employee_registration || ''
             });
         }
@@ -36,7 +45,6 @@ const EditEmployee = () => {
         title: "Edit Employee",
         fields: [
             { label: "Name", type: "text", required: true },
-            { label: "Employee Id", type: "number", required: true },
             { label: "Job Role", type: "text", required: true },
             { label: "Salary", type: "number", required: true },
             { label: "Birth", type: "date", required: true },
@@ -54,19 +62,31 @@ const EditEmployee = () => {
         e.preventDefault();
         try {
             setSubmitedStatus('');
-            const cleanedData = {
+            
+            const dataToUpdate = {
                 name: formData.name,
-                employeeId: formData.employeeId,
                 job_role: formData.job_role,
                 salary: formData.salary,
-                birth: formData.birth,
-                employee_registration: formData.employee_registration
+                birth: new Date(formData.birth).toISOString(),
+                employee_registration: formData.employee_registration,
+                employee_id: id
             };
-            console.log("Updated formData", cleanedData);
 
-            const response = await createNewEmployee(cleanedData); // Replace with update API call
+            console.log("Updated formData", dataToUpdate);
+
+            const response = await updateEmployee(dataToUpdate);
             console.log('Employee updated successfully:', response);
             setSubmitedStatus('true');
+
+            // Clear form after successful update
+            setFormData({
+                name: '',
+                employeeId: '',
+                job_role: '',
+                salary: '',
+                birth: '',
+                employee_registration: ''
+            });
         } catch (error) {
             setSubmitedStatus('false');
             console.error('Error updating employee:', error);
@@ -81,6 +101,7 @@ const EditEmployee = () => {
                 type={field.type}
                 name={fieldName}
                 required={field.required}
+                readOnly={field.readOnly}
                 min={field.min}
                 max={field.max}
                 minLength={field.minLength}
