@@ -128,9 +128,9 @@ const CreateEmployee = () => {
           </div>
         )}
         <form onSubmit={handleSubmit}>
-          <h2>{formConfig.title}</h2>
+          <h2 className="text-indigo-800">{formConfig.title}</h2>
           {formConfig.fields.map(field => (
-            <div key={field.label}>
+            <div key={field.label} style={{ width: '300px', marginBottom: '1em' }}>
               <br />
               <Form.Label>{field.label}</Form.Label>
               {renderField(field)}

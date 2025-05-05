@@ -10,6 +10,7 @@ const ListEmployees = () => {
 
   const navigate = useNavigate();
   const [employees, setEmployees] = useState([]);
+  const [submitedStatus, setSubmitedStatus] = useState('');
   const { setEmployeeData } = useContext(EmployeeContext);
 
   const handleEdit = (id) => {
@@ -37,18 +38,24 @@ const ListEmployees = () => {
   };
 
   const handleDelete = async (id) => {
+    console.log('Delete button clicked for employee ID:', id);
+    setSubmitedStatus('');
+    
     try {
       const response = await deleteEmployeeById(id);
-      if (response.success) {
+      if (response.status === 200) {
+        console.log('Employee deleted successfully:', response);
         setEmployees((prevEmployees) =>
           prevEmployees.filter((employee) => employee.employee_id !== id)
         );
-        console.log('Employee deleted successfully:', response);
+        setSubmitedStatus('true');
       } else {
-        console.error('Failed to delete employee:', response.message);
+        console.error('Failed to delete employee:', response);
+        setSubmitedStatus('false');
       }
     } catch (error) {
       console.error('Error deleting employee:', error);
+      setSubmitedStatus('false');
     }
   };
 
@@ -80,6 +87,45 @@ const ListEmployees = () => {
       <Header />
       <Container>
         <br />
+        <div style={{ paddingLeft: '4em', position: 'relative' }}>
+                {(submitedStatus === 'true' || submitedStatus === 'false') && (
+                    <div
+                        style={{
+                            position: 'absolute',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            backgroundColor: submitedStatus === 'true' ? 'green' : 'red',
+                            color: 'white',
+                            padding: '1em',
+                            borderRadius: '5px',
+                            zIndex: 1000,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            width: '300px',
+                        }}
+                    >
+                        <span>
+                            {submitedStatus === 'true'
+                                ? 'Form updated successfully!'
+                                : 'Error updating the form. Please try again.'}
+                        </span>
+                        <button
+                            style={{
+                                background: 'none',
+                                border: 'none',
+                                color: 'white',
+                                fontWeight: 'bold',
+                                cursor: 'pointer',
+                                marginLeft: '1em',
+                            }}
+                            onClick={() => setSubmitedStatus('')}
+                        >
+                            X
+                        </button>
+                    </div>
+                )}
+        </div>
         <h2 className="text-indigo-800">List Employees</h2>
         <div style={{ paddingBottom: '3em' }}>
           <table className="border-separate border-spacing-2 border border-gray-400 dark:border-gray-500">

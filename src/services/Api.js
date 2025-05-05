@@ -32,8 +32,11 @@ async function updateEmployee(employee) {
 }
 
 async function deleteEmployeeById(employee_id) {
+  console.log("employee_id", employee_id);
+  
   try {
     const response = await api.delete(`/employees/${employee_id}`);
+    console.log("response", response);
     return response.data;
   } catch (error) {
     console.error('Erro ao deletar funcionário:', error);
