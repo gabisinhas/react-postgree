@@ -38,29 +38,32 @@ const ListEmployees = () => {
   };
 
   const handleDelete = async (id) => {
-    console.log('Delete button clicked for employee ID:', id);
     setSubmitedStatus('');
-    
+    console.log('Delete button clicked for employee ID:', id);
     try {
       const response = await deleteEmployeeById(id);
-      if (response.status === 200) {
-        console.log('Employee deleted successfully:', response);
+      if (response?.status === 200) {
+        setSubmitedStatus('true');
         setEmployees((prevEmployees) =>
           prevEmployees.filter((employee) => employee.employee_id !== id)
-        );
-        setSubmitedStatus('true');
+        );          
+        
       } else {
-        console.error('Failed to delete employee:', response);
+        console.error('Failed to delete employee. Status:', response?.status);
+        setSubmitedStatus('false'); // Use boolean false
+      }}catch (error) {
+        console.error('Error deleting employee:', error);
+        console.log('Full error object:', error); // Add this line
         setSubmitedStatus('false');
       }
-    } catch (error) {
-      console.error('Error deleting employee:', error);
-      setSubmitedStatus('false');
-    }
   };
 
   useEffect(() => {
+    console.log('Updated employees:', employees);
+   // This effect will run whenever the 'employees' state changes
+
     const fetchEmployees = async () => {
+      console.log('Fetching employees...');
       try {
         const data = await getAllEmployees();
         console.log('data', data);
@@ -80,7 +83,7 @@ const ListEmployees = () => {
     };
 
     fetchEmployees();
-  }, []);
+  }, [],[employees]);
 
   return (
     <>
